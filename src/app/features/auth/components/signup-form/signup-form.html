@@ -1,0 +1,153 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="px-12 pb-10">
+
+    <!-- Username -->
+    <div class="relative w-full mb-2">
+      @let name = registerForm.get('name');
+      <input
+        formControlName="name"
+        type="text"
+        id="username"
+        placeholder=" "
+        [class.error-input]="name?.errors && name?.touched"
+        class="peer block w-full rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900
+               focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600  dark:focus:border-blue-500"
+      />
+      <label for="username"
+        class="absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-white px-2 text-sm text-gray-500 duration-300
+               peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100
+               peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-blue-600">
+        Username
+      </label>
+    </div>
+    @if(name?.errors && name?.touched){
+      <app-error-message>
+        @if(name?.getError('required')){ This input is required! }
+        @if(name?.getError('maxlength') || name?.getError('minlength')){ At least 3 characters (and up to 30 characters) }
+      </app-error-message>
+    }
+
+    <!-- Email -->
+    <div class="relative w-full mb-2">
+      @let email = registerForm.get('email');
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        placeholder=" "
+        [class.error-input]="email?.errors && email?.touched"
+        class="peer block w-full rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900
+               focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600  dark:focus:border-blue-500"
+      />
+      <label for="email"
+        class="absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-white px-2 text-sm text-gray-500 duration-300
+               peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100
+               peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-blue-600">
+        Email Address
+      </label>
+    </div>
+    @if(email?.errors && email?.touched){
+      <app-error-message>
+        @if(email?.getError('required')){ This input is required! }
+        @if(email?.getError('pattern')){ Please enter a valid email address }
+      </app-error-message>
+    }
+
+    <!-- Password -->
+    <div class="relative w-full mb-2">
+      @let password = registerForm.get('password');
+      <input
+        formControlName="password"
+        type="password"
+        id="password"
+        placeholder=" "
+        [class.error-input]="password?.errors && password?.touched"
+        class="peer block w-full rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900
+               focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600  dark:focus:border-blue-500"
+      />
+      <label for="password"
+        class="absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-white px-2 text-sm text-gray-500 duration-300
+               peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100
+               peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-blue-600">
+        Password
+      </label>
+    </div>
+    @if(password?.errors && password?.touched){
+      <app-error-message>
+        @if(password?.getError('required')){ This input is required! }
+        @if(password?.getError('pattern')){ Password must be at least 8 characters and include uppercase, lowercase, number, and special character }
+      </app-error-message>
+    }
+
+    <!-- Re-enter Password -->
+    <div class="relative w-full mb-2">
+      @let rePassword = registerForm.get('rePassword');
+      <input
+        type="password"
+        formControlName="rePassword"
+        id="rePassword"
+        placeholder=" "
+        [class.error-input]="rePassword?.errors && rePassword?.touched"
+        class="peer block w-full rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900
+               focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600  dark:focus:border-blue-500"
+      />
+      <label for="rePassword"
+        class="absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-white px-2 text-sm text-gray-500 duration-300
+               peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100
+               peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-blue-600">
+        Re-enter Password
+      </label>
+    </div>
+    @if(( registerForm.getError('missMatch') || rePassword?.errors)&& rePassword?.touched){
+      <app-error-message>
+        @if(rePassword?.getError('required')){ This input is required! }
+        @if(registerForm.getError('missMatch')){ Password doesnot match }
+      </app-error-message>
+    }
+
+    <!-- Phone -->
+    <div class="relative w-full mb-2">
+      @let phone = registerForm.get('phone');
+      <input
+        formControlName="phone"
+        type="tel"
+        id="phone"
+        placeholder=" "
+        [class.error-input]="phone?.errors && phone?.touched"
+        class="peer block w-full rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900
+               focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600  dark:focus:border-blue-500"
+      />
+      <label for="phone"
+        class="absolute start-1 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-white px-2 text-sm text-gray-500 duration-300
+               peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100
+               peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-blue-600">
+        Phone Number
+      </label>
+    </div>
+    @if(phone?.errors && phone?.touched){
+      <app-error-message>
+        @if(phone?.getError('required')){ This input is required! }
+        @if(phone?.getError('pattern')){ Please enter a valid Egyptian phone number (e.g., 010xxxxxxxx). }
+      </app-error-message>
+    }
+
+    <!-- Submit button -->
+    <button
+      [disabled]="isLoading"
+      type="submit"
+      class="min-w-[250px] disabled:bg-gray-500 disabled:cursor-auto block mx-auto text-2xl py-2 mt-8 rounded-full bg-main-400 cursor-pointer hover:bg-main-700 duration-300 text-gray-100 focus:outline-none"
+    >
+      Submit
+      @if(isLoading){
+        <i class="fas fa-spinner fa-spin"></i>
+      }
+    </button>
+
+    <!-- Error message from server -->
+    @if(errorMessage){
+      <div class="bg-red-100 border-l-4 my-4 text-2xl font-light border-red-500 text-red-700 p-4" role="alert">
+        <p>{{errorMessage}}</p>
+      </div>
+    }
+  </div>
+</form>
