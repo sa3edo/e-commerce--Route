@@ -4,6 +4,9 @@ import { ErrorMessage } from "../error-message/error-message";
 import { JsonPipe } from '@angular/common';
 import { AuthService } from '../../services/auth-services';
 import { HttpErrorResponse } from '@angular/common/http';
+import { IRegisterUserResponse } from '../../interfaces/IRegisterUserResponse';
+import { Router } from '@angular/router';
+import { interval, take } from 'rxjs';
 
 @Component({
   selector: 'app-signup-form',
@@ -15,18 +18,21 @@ export class SignupForm implements OnInit {
 
   //Inject Services
   private readonly authSirvec = inject(AuthService)
+  private router = inject(Router)
 
   // Variables
-  errorMessage?:string //for error response message
+  errorMessage?: string //for error response message
+  successMessage?: string //for success response message
   isLoading: boolean = false // track the request
+  timer: number = 5;
   ngOnInit() {
-    // this.registerForm.setValue({
-    //   name: "mohammed",
-    //   email: "mohamed20@gmail.com",
-    //   password: "01091215398@My",
-    //   rePassword: "01091215398@My",
-    //   phone: "01091215398",
-    // })
+    this.registerForm.setValue({
+      name: "mohammed",
+      email: "mohamed20@gmail.com",
+      password: "01091215398@My",
+      rePassword: "01091215398@My",
+      phone: "01091215398",
+    })
   }
 
   registerForm = new FormGroup({
@@ -43,34 +49,48 @@ export class SignupForm implements OnInit {
   )
   onSubmit() {
     console.log(this.registerForm);
-    if(this.registerForm.valid){
+    if (this.registerForm.valid) {
       this.handleBeforeSubmit()
 
       const userData = this.registerForm.value
-      this.authSirvec.signUp(userData).subscribe({
+      this.authSirvec.registerUser(userData).subscribe({
         next: response => {
-          console.log(response);
+          this.handleAfterSucces(response)
         }, error: (err: HttpErrorResponse) => {
-          console.log(err.error);
           this.handleErrorResponse(err);
         }
       })
     }
     console.log(this.registerForm.value);
   }
-  handleBeforeSubmit():void{
+  handleBeforeSubmit(): void {
     this.registerForm.markAllAsTouched()
-    this.errorMessage=undefined
-    this.isLoading=true
+    this.errorMessage = undefined
+    this.isLoading = true
   }
-  handleAfterSucces():void{
+  handleAfterSucces(response: IRegisterUserResponse): void {
+    this.isLoading = false
+    this.errorMessage = undefined
+    console.log(response)
+    this.successMessage = response.message;
     this.registerForm.reset()
-    this.errorMessage=undefined
+    interval(1000).pipe(take(5)).subscribe(
+      () => {
+        this.timer--
+        if (this.timer === 0)
+          this.redirectTo('/signin')
+      }
+    )
+
+  }
+
+  handleErrorResponse(error: HttpErrorResponse) {
+    console.log(error.error);
+    this.errorMessage = error.error.message;
     this.isLoading = false
   }
-  handleErrorResponse(error:HttpErrorResponse){
-  this.errorMessage=error.error.message;
-  this.isLoading = false
+  redirectTo(url: string) {
+    this.router.navigateByUrl(url)
   }
   passMissMatch(FormGroup: any) {
 

@@ -12,7 +12,10 @@ export class AuthService{
     
      baseURL : string ='https://ecommerce.routemisr.com/api/v1/auth';
 
-    signUp(userData:{}){
+    registerUser(userData:{}){
         return this.http.post<IRegisterUserResponse>(`${this.baseURL}/signup`, userData);
+    }
+    signIn(userData:{}){
+        return this.http.post<IRegisterUserResponse>(`${this.baseURL}/signin`, userData);
     }
 }

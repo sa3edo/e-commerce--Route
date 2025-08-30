@@ -1,0 +1,18 @@
+.response-msg{
+    transform: scaleX(0);
+    opacity: 0;
+    animation: slideR .3s forwards ;
+    transform-origin: left;
+}
+
+
+@keyframes slideR {
+    from {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    to{
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
