@@ -54,5 +54,13 @@
       <p>{{ errorMessage }}</p>
     </div>
     }
+    @if(successMessage){
+    <div
+      class="response-msg bg-green-100 border-l-4 my-4 text-2xl font-light border-green-500 text-green-700 p-4"
+      role="alert"
+    >
+      <p>{{ successMessage }}</p>
+    </div>
+    }
   </div>
 </form>

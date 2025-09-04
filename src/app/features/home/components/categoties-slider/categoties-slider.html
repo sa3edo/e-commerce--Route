@@ -1,0 +1,15 @@
+@if(!allCategories){
+    <app-loading-spinner />
+}@else {
+  <h1 class="text-2xl capitalize pb-3">popular categories</h1>
+    <owl-carousel-o #owlSlider class="categories-slider" [options]="customOptions" (initialized)="onCarouselInitialized($event)">
+        
+        @for (cat of allCategories; track cat._id) {
+            <ng-template carouselSlide [id]="cat._id">
+                <img class="h-[250px] object-cover" [src]="cat.image" [alt]="cat.name" [title]="cat.name">
+                <p class="capitalize my-2">{{cat.name }}</p>
+            </ng-template>
+        }
+        
+    </owl-carousel-o>
+}

@@ -9,5 +9,5 @@ import { Navbar } from "../../../components/navbar/navbar";
   styleUrl: './main-layout.css'
 })
 export class MainLayout {
-
+  
 }

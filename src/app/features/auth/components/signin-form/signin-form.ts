@@ -17,7 +17,7 @@ export class SigninForm {
   isLoading: boolean = false;
   successMessage: string | undefined;
   errorMessage: string | undefined;
-
+  timer: number = 3; // for redirect after login
   //Inject Services
   private readonly authSirvec = inject(AuthService)
   private router = inject(Router)
@@ -54,9 +54,18 @@ export class SigninForm {
     this.isLoading = false
     this.errorMessage = undefined
     console.log(response)
+    const token = response.token;
+    localStorage.setItem("token", token)
     this.successMessage = response.message;
     this.loginForm.reset()
-    this.redirectTo('home')
+        interval(1000).pipe(take(3)).subscribe(
+      () => {
+        this.timer--
+        if (this.timer === 0)
+          this.redirectTo('/home')
+      }
+    )
+    
 
   }
 

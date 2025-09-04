@@ -1,23 +1,101 @@
-@layer utilities {
-    .error-input{
-        @apply   border border-red-500 focus:border-red-600 focus:ring-red-600 text-red-500 ;
-        animation: shake .3s forwards;
-    }
-  .valid-input {
-    @apply border border-green-500 focus:border-green-600 focus:ring-green-600 text-green-600;
+.error-input {
+  @apply border border-red-500 focus:border-red-600 focus:ring-red-600 text-red-500;
+  animation: shake .3s forwards;
+}
+
+.valid-input {
+  @apply border border-green-500 focus:border-green-600 focus:ring-green-600 text-green-600;
+}
+
+.btn-main {
+  @apply  disabled:bg-gray-500 disabled:cursor-auto block mx-auto text-2xl py-2 mt-8 rounded-full bg-main-400 cursor-pointer hover:bg-main-700 duration-300 text-gray-100 focus:outline-none
+}
+
+.card {
+  transform: scaleY(0) scale(0);
+  opacity: 0;
+  animation: scaleDown .5s forwards;
+  transform-origin: top;
+}
+
+@keyframes scaleDown {
+  from {
+    transform: scaleY(0) scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scaleY(1) scale(1);
+    opacity: 1;
   }
 }
 
+
 @keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(-1deg); }
-  100% { transform: translate(0px, 0px) rotate(0deg); }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(1px, 2px) rotate(-1deg);
+  }
+
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+}
+.ngx-pagination li, 
+.ngx-pagination a {
+  @apply !rounded-md text-lg font-medium;
+}
+
+.ngx-pagination a {
+  @apply !px-3 !py-1 text-main-700 hover:!bg-main-100 hover:text-main-900 transition-colors duration-300;
+}
+
+.ngx-pagination .current {
+  @apply !bg-main-500 !px-3 !py-1.5 text-white font-semibold cursor-default;
+}
+
+
+.ngx-pagination .pagination-previous a,
+.ngx-pagination .pagination-next a {
+  @apply !px-4  text-main-900 hover:!bg-main-300  transition-colors duration-300 rounded-md;
+}
+
+.ngx-pagination .disabled a,
+.ngx-pagination .disabled {
+  @apply  text-gray-400 cursor-not-allowed;
 }

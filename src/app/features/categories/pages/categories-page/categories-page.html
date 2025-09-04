@@ -1,1 +1,30 @@
-<p>categories-page works!</p>
+@if(!allCategories){
+    <app-loading-spinner />
+}@else {
+  <section class="py-4">
+    <app-section-title [title]="'All Categories'"/>
+      <div class="grid grid-cols-3 gap-4">
+    @for(cat of allCategories;track $index){
+    <div class="">
+      <div
+      [style.animationDelay]="($index * 0.1) + 's'"
+        class="card h-full border-2 flex flex-col justify-between border-gray-200 border-opacity-60 rounded-lg overflow-hidden"
+      >
+        <img
+          class="lg:h-48 md:h-36 w-full object-contain object-center"
+          [src]="cat.image"
+          [alt]="cat.name"
+        />
+        <div class="p-6 flex flex-col justify-between flex-1">
+
+          <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
+            {{ cat.name }}
+          </h1>
+
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  </section>
+}
