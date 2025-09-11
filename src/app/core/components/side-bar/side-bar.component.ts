@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICategoriesData } from '../../../features/categories/interfaces/IGetAllCategories';
 import { ISubCatData } from '../../../features/categories/interfaces/IGetSubCategories';
 
@@ -12,6 +12,9 @@ export class SideBarComponent implements OnInit {
 @Input() categories! : ICategoriesData[]
 @Input() subCategories! : ISubCatData[]
 
+@Output() subCategoryChanged = new EventEmitter<string[]>();
+
+selectedSubCategories: string[] = [];
   
 openedCategory: string | null = null;
 subCategoryMap : {[key : string] : ISubCatData[]}= {};
@@ -39,5 +42,17 @@ toggleClass(event : HTMLElement){
   const ele = event as HTMLElement;
   ele.classList.toggle('open')
 
+}
+onSubCategoryChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+  const value = input.value;
+
+  if (input.checked) {
+    this.selectedSubCategories.push(value);
+  } else {
+    this.selectedSubCategories = this.selectedSubCategories.filter(id => id !== value);
+  }
+
+  this.subCategoryChanged.emit(this.selectedSubCategories);
 }
 }

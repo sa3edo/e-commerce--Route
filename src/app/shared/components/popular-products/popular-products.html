@@ -11,7 +11,7 @@
         [style.animationDelay]="$index * 0.1 + 's'"
         class="card h-full border-2 flex flex-col justify-between border-gray-200 border-opacity-60 rounded-4xl shadow overflow-hidden"
       >
-      <a [routerLink]="['/home/details', prd._id, prd.slug]">
+      <a [routerLink]="['/details', prd._id, prd.slug]">
         <img
         class="lg:h-72 md:h-36 h-[450px] w-full object-contain object-center"
         [src]="prd.imageCover"
@@ -25,7 +25,7 @@
             {{ prd.category.name }}
           </h2>
           <a
-            [routerLink]="['/home/details', prd._id, prd.slug]"
+            [routerLink]="['/details', prd._id, prd.slug]"
             class="title-font text-2xl font-medium line-clamp-1 text-gray-900 mb-3"
           >
             {{ prd.title }}

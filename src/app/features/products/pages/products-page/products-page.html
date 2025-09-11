@@ -3,7 +3,7 @@
 } @else {
 <section class="md:grid grid-cols-10 py-4">
   <div class="col-span-2 hidden md:block">
-    <app-side-bar [categories]="allCategories" [subCategories]="allSubcategories"></app-side-bar>
+    <app-side-bar [categories]="allCategories" [subCategories]="allSubcategories"   (subCategoryChanged)="onSubCategoryFilter($event)">></app-side-bar>
   </div>
   <!-- main content -->
   <div class="col-span-8">
@@ -40,7 +40,7 @@
               {{ prd.category.name }}
             </h2>
             <a
-              [routerLink]="['/home/details', prd._id, prd.slug]"
+              [routerLink]="['/details', prd._id, prd.slug]"
               class="title-font text-2xl font-medium line-clamp-1 text-gray-900 mb-3"
             >
               {{ prd.title }}

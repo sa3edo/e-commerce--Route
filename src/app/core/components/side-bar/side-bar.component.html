@@ -5,35 +5,39 @@
 
   <ul class="space-y-2">
     @for(cat of categories; track cat._id) {
-    <li #catList class="rounded-md transition-item ">
+    <li #catList class="rounded-md transition-item">
       <!-- Category Header -->
       <div
         (click)="toggleCategory(cat._id)"
-        class="flex items-center justify-between gap-3 p-2 rounded-md  hover:bg-main-100 transition"
+        class="flex items-center justify-between gap-3 p-2 rounded-md hover:bg-main-100 transition"
       >
-        <div (click)="toggleClass(catList)" class="flex items-center cursor-pointer w-full gap-3" >
+        <div
+          (click)="toggleClass(catList)"
+          class="flex items-center cursor-pointer w-full gap-3"
+        >
           <img
             [src]="cat.image"
             alt="{{ cat.name }}"
             class="w-10 h-10 object-cover rounded-md border"
           />
-          <span  class="text-gray-700 font-medium">{{ cat.name }}</span>
+          <span class="text-gray-700 font-medium">{{ cat.name }}</span>
         </div>
-        <div (click)="toggleClass(catList)" class=" size-12 flex cursor-pointer justify-center items-center ">
-
+        <div
+          (click)="toggleClass(catList)"
+          class="size-12 flex cursor-pointer justify-center items-center"
+        >
           <i
-          
-          class="fas  "
-          [class]="{
-            'fa-chevron-down': openedCategory !== cat._id,
-            'fa-chevron-up': openedCategory === cat._id
-          }"
-        ></i>
-      </div>
+            class="fas"
+            [class]="{
+              'fa-chevron-down': openedCategory !== cat._id,
+              'fa-chevron-up': openedCategory === cat._id
+            }"
+          ></i>
+        </div>
       </div>
 
       <!-- Subcategories Dropdown -->
-      
+
       <div class="sub-list">
         @for(sub of subCategoryMap[cat._id]; track sub._id) {
         <ul class="pl-5 mt-2 space-y-1 border-l-2 border-main-200">
@@ -41,16 +45,17 @@
             class="text-sm text-gray-600 cursor-pointer hover:text-main-500 transition"
           >
             <div class="flex items-center mb-4">
-              <input
-                id="default-checkbox"
-                type="checkbox"
-                value=""
-                class="w-4 h-4 text-main-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-main-500 focus:ring-2"
-              />
-              <label
-                for="default-checkbox"
-                class="ms-2 text-sm font-medium text-gray-900"
-                >{{ sub.name }}</label
+<input
+  id="default-checkbox-{{ sub._id }}"
+  type="checkbox"
+  [value]="sub._id"
+  (change)="onSubCategoryChange($event)"
+  class="w-4 h-4 text-main-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-main-500 focus:ring-2"
+/>
+<label
+  for="default-checkbox-{{ sub._id }}"
+  class="ms-2 text-sm font-medium text-gray-900"
+>{{ sub.name }}</label
               >
             </div>
           </li>
@@ -65,7 +70,6 @@
         </div>
         }
       </div>
-      
     </li>
     <hr class="my-2" />
     }

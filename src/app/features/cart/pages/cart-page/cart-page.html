@@ -10,7 +10,7 @@
       
       <!-- Product list -->
       <div class="w-full lg:w-2/3 max-h-[70vh] overflow-y-auto ">
-        @if(cartItems.length > 0){
+      
           @for(item of cartItems; track item._id){
             <app-cart-item [item]="item" (update)="getCart()" />
           } @empty {
@@ -19,14 +19,14 @@
               <p class="text-2xl font-bold text-gray-800 mb-2">Your Cart is Empty</p>
               <p class="text-gray-500 mb-6">Looks like you haven’t added anything yet.</p>
               <a
-                routerLink="/home/products"
+                routerLink="/products"
                 class="bg-main-600 hover:bg-main-700 text-white text-lg font-medium px-6 py-3 rounded-full transition duration-300"
               >
                 Browse Products
               </a>
             </div>
           }
-        }
+        
       </div>
 
       <!-- Order summary -->
@@ -50,11 +50,12 @@
         </div>
 
         <!-- Checkout button -->
-        <button
+        <a
+        [routerLink]="['/checkout/',cartId]"
           class="w-full flex items-center justify-center rounded-lg bg-main-600 px-5 py-3 text-lg font-semibold text-white hover:bg-main-700 transition duration-300 shadow-md"
         >
           Proceed to Checkout
-        </button>
+        </a>
 
         <!-- Continue shopping -->
         <div class="text-center mt-4">

@@ -6,6 +6,7 @@ import { IGetUserCart } from "../interfaces/IGetUserCart";
 import { isPlatformBrowser } from "@angular/common";
 import { IUpdateCartResponse } from "../interfaces/IUpdateCartResponse";
 import { IRemoveItemCartResponse } from "../interfaces/IRemoveItemCartResponse";
+import { IGetUserOrder } from "../interfaces/IGetUserOrders";
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +31,9 @@ export class CartServices extends baseHttp {
     }
     clearCart(){
         return this.delete<{message:string}>(APP_APIS.Cart,{ token: localStorage.getItem("token") })
+    }
+    getUserOrder(userId : string){
+        return this.get<IGetUserOrder[]>(`${APP_APIS.allOrders}/${userId}`)
     }
     }
 

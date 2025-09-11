@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { ProductServices } from '../../services/product';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { IGetAllProducts, IProductsData } from '../../interfaces/IGetAllProducts';
 import { SectionTitle } from "../../../../shared/components/section-title/section-title";
 import { LoadingSpinner } from "../../../../shared/components/loading-spinner/loading-spinner";
@@ -48,7 +48,7 @@ export class ProductsPage implements OnInit {
   }
 
   getAllProducts() {
-    this.productServices.getAllProducts({ page: this.page, limit: this.limit }).subscribe({
+    this.productServices.getAllProducts({ page: this.page, limit: 5000 }).subscribe({
       next: (response: IGetAllProducts) => {
         console.log(response.data);
         this.allProducts = response.data
@@ -60,6 +60,20 @@ export class ProductsPage implements OnInit {
       }
     })
   }
+onSubCategoryFilter(selected: string[]) {
+  let params = new HttpParams();
+
+  selected.forEach(id => {
+    params = params.append('subcategory[in]', id);
+  });
+
+  this.productServices.getAllProducts(params)
+    .subscribe((res: any) => {
+      this.allProducts = res.data;
+      this.totalItems = res.results;
+    });
+}
+
   getCategories() {
     this.categoriesServices.getAllCategories().subscribe({
       next: (response: IGetAllCategoris) => {

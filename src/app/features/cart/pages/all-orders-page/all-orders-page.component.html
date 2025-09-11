@@ -1,0 +1,179 @@
+<section class="p-6">
+  <!-- Title -->
+  <app-section-title [title]="'My Orders'"></app-section-title>
+
+  <!-- Loading -->
+  @if(isLoading){
+  <div class="flex justify-center py-10">
+    <app-loading-spinner />
+  </div>
+  }
+
+  <!-- Error -->
+  @if(errorMessage){
+  <div
+    class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-sm"
+  >
+    {{ errorMessage }}
+  </div>
+  }
+
+  <!-- Orders List -->
+  @if(!isLoading && orders.length > 0){
+  <div class="space-y-10">
+    @for(order of orders; track order._id){
+    <div class="relative pl-8 border-l-4 border-main-500">
+      <!-- Dot Timeline -->
+      <span
+        class="absolute -left-3 top-3 w-6 h-6 flex items-center justify-center rounded-full bg-main-500 text-white shadow"
+      >
+        <i class="fas fa-receipt text-xs"></i>
+      </span>
+
+      <!-- Order Card -->
+      <div
+        class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition"
+      >
+        <!-- Header -->
+        <div class="flex justify-between items-center border-b pb-4 mb-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">
+              Order #{{ order.id }}
+            </h3>
+            <p class="text-xs text-gray-500">
+              <i class="fas fa-calendar-alt mr-1"></i>
+              {{ order.createdAt | date : "medium" }}
+            </p>
+          </div>
+
+ <div
+  class="flex flex-col md:flex-row md:items-center gap-2 md:gap-3 text-right"
+>
+  <!-- Payment Method -->
+  <span
+    class="px-3 py-1 text-sm font-medium rounded-full shadow-md backdrop-blur-md border border-white/20"
+    [ngClass]="
+      order.paymentMethodType === 'cash'
+        ? 'bg-purple-500/30 text-purple-900'
+        : 'bg-indigo-500/30 text-indigo-900'
+    "
+  >
+    <i
+      class="fas mr-1"
+      [ngClass]="
+        order.paymentMethodType === 'cash'
+          ? 'fa-money-bill-wave'
+          : 'fa-credit-card'
+      "
+    ></i>
+    {{ order.paymentMethodType | titlecase }}
+  </span>
+
+  <!-- Paid -->
+  <span
+    class="px-3 py-1 text-sm font-medium rounded-full shadow-md backdrop-blur-md border border-white/20"
+    [ngClass]="
+      order.isPaid
+        ? 'bg-green-500/30 text-green-900'
+        : 'bg-yellow-500/30 text-yellow-900'
+    "
+  >
+    <i
+      class="fas mr-1"
+      [ngClass]="order.isPaid ? 'fa-check-circle' : 'fa-clock'"
+    ></i>
+    {{ order.isPaid ? 'Paid' : 'Pending' }}
+  </span>
+
+  <!-- Delivered -->
+  <span
+    class="px-3 py-1 text-sm font-medium rounded-full shadow-md backdrop-blur-md border border-white/20"
+    [ngClass]="
+      order.isDelivered
+        ? 'bg-blue-500/30 text-blue-900'
+        : 'bg-gray-500/30 text-gray-900'
+    "
+  >
+    <i
+      class="fas mr-1"
+      [ngClass]="order.isDelivered ? 'fa-truck' : 'fa-box'"
+    ></i>
+    {{ order.isDelivered ? 'Delivered' : 'Processing' }}
+  </span>
+</div>
+
+        </div>
+
+        <!-- User Info -->
+        <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700 mb-4">
+          <p>
+            <i class="fas fa-user mr-1 text-main-500"></i>
+            <strong>{{ order.user.name }}</strong>
+          </p>
+          <p>
+            <i class="fas fa-envelope mr-1 text-main-500"></i>
+            {{ order.user.email }}
+          </p>
+          <p>
+            <i class="fas fa-phone mr-1 text-main-500"></i>
+            {{ order.user.phone }}
+          </p>
+          <p>
+            <i class="fas fa-map-marker-alt mr-1 text-main-500"></i>
+            {{ order.shippingAddress.city }},
+            {{ order.shippingAddress.details }}
+          </p>
+        </div>
+
+        <!-- Products -->
+        <div class="divide-y border rounded-lg overflow-hidden">
+          @for(item of order.cartItems; track item._id){
+          <div class="flex items-center gap-4 p-4">
+            <img
+              [src]="item.product.imageCover"
+              class="w-14 h-14 rounded-lg object-cover border"
+            />
+            <div class="flex-1">
+              <p class="font-medium text-gray-800">{{ item.product.title }}</p>
+              <p class="text-sm text-gray-500">Qty: {{ item.count }}</p>
+            </div>
+            <div class="text-right">
+              <p class="text-sm text-gray-600">{{ item.price | currency }}</p>
+              <p class="font-semibold text-gray-800">
+                {{ item.price * item.count | currency }}
+              </p>
+            </div>
+          </div>
+          }
+        </div>
+
+        <!-- Totals -->
+        <div class="mt-4 flex justify-end">
+          <div class="text-right">
+            <p class="text-sm text-gray-500">
+              Tax: {{ order.taxPrice | currency }}
+            </p>
+            <p class="text-sm text-gray-500">
+              Shipping: {{ order.shippingPrice | currency }}
+            </p>
+            <p class="text-lg font-bold text-main-600">
+              Total: {{ order.totalOrderPrice | currency }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+
+  <!-- Empty Orders -->
+  @if(!isLoading && orders.length === 0){
+  <div class="text-center py-14">
+    <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
+    <p class="text-xl font-medium text-gray-600">
+      You don’t have any orders yet.
+    </p>
+  </div>
+  }
+</section>

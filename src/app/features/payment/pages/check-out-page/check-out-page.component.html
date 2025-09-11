@@ -1,0 +1,134 @@
+<section class="my-5">
+  <app-section-title [title]="'checkout page'"></app-section-title>
+
+  <div>
+    <!-- Checkout Form with Tailwind Floating Labels -->
+    <form
+      [formGroup]="checkoutForm"
+      class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-10 space-y-8"
+    >
+      <h2 class="text-2xl font-semibold text-gray-800">
+        Shipping Address Details
+      </h2>
+
+      <!-- Details -->
+      <div class="relative w-full mb-4">
+        @let details = checkoutForm.get('details');
+        <textarea
+          formControlName="details"
+          id="details"
+          rows="3"
+          placeholder=" "
+          [class.error-input]="details?.errors && details?.touched"
+          [class.valid-input]="!details?.errors && details?.touched"
+          class="peer block w-full resize-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:outline-none focus:ring-0 focus:border-main-400"
+        ></textarea>
+        <label
+          for="details"
+          class="absolute start-2 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-4 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-main-600"
+        >
+          Address Details
+        </label>
+      </div>
+      @if(details?.errors && details?.touched){
+      <app-error-message>
+        @if(details?.getError('required')) { Address details are required. }
+        @if(details?.getError('minlength')) { At least 10 characters required. }
+      </app-error-message>
+      }
+
+      <!-- City -->
+      <div class="relative w-full mb-4">
+        @let city = checkoutForm.get('city');
+        <input
+          formControlName="city"
+          type="text"
+          id="city"
+          placeholder=" "
+          [class.error-input]="city?.errors && city?.touched"
+          [class.valid-input]="!city?.errors && city?.touched"
+          class="peer block w-full rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:outline-none focus:ring-0 focus:border-main-400"
+        />
+        <label
+          for="city"
+          class="absolute start-2 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-main-600"
+        >
+          City
+        </label>
+      </div>
+      @if(city?.errors && city?.touched){
+      <app-error-message>
+        @if(city?.getError('required')) { City is required. }
+        @if(city?.getError('minlength')) { City name must be at least 3
+        characters. }
+      </app-error-message>
+      }
+
+      <!-- Phone -->
+      <div class="relative w-full mb-4">
+        @let phone = checkoutForm.get('phone');
+        <input
+          formControlName="phone"
+          type="tel"
+          id="phone"
+          placeholder=" "
+          [class.error-input]="phone?.errors && phone?.touched"
+          [class.valid-input]="!phone?.errors && phone?.touched"
+          class="peer block w-full rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:outline-none focus:ring-0 focus:border-main-400"
+        />
+        <label
+          for="phone"
+          class="absolute start-2 top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-white px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:text-main-600"
+        >
+          Phone
+        </label>
+      </div>
+      @if(phone?.errors && phone?.touched){
+      <app-error-message>
+        @if(phone?.getError('required')) { Phone number is required. }
+        @if(phone?.getError('pattern')) { Please enter a valid Egyptian phone
+        number (e.g., 010xxxxxxxx). }
+      </app-error-message>
+      }
+
+      <!-- Submit Buttons -->
+      <div class="flex gap-3 justify-end">
+        <button
+          [disabled]="isLoadingOnline || !checkoutForm.valid"
+          (click)="pay('online')"
+          class="px-6 py-3 disabled:bg-main-300 disabled:cursor-auto cursor-pointer rounded-lg bg-main-600 hover:bg-main-700 text-white text-sm font-medium shadow focus:outline-none focus:ring-2 focus:ring-main-400 transition"
+        >
+          Online Payment @if(isLoadingOnline){
+          <i class="fas fa-spinner fa-spin"></i> }
+        </button>
+        <button
+          [disabled]="isLoadingCash || !checkoutForm.valid"
+          (click)="pay('cash')"
+          class="px-6 py-3 disabled:bg-main-300 disabled:cursor-auto cursor-pointer rounded-lg bg-main-600 hover:bg-main-700 text-white text-sm font-medium shadow focus:outline-none focus:ring-2 focus:ring-main-400 transition"
+        >
+          Cash On Delivery @if(isLoadingCash){
+          <i class="fas fa-spinner fa-spin"></i> }
+        </button>
+      </div>
+
+      <!-- Error message -->
+      @if(errorMessage){
+      <div
+        class="bg-red-100 border-l-4 my-4 text-lg border-red-500 text-red-700 p-4"
+      >
+        <p>{{ errorMessage }}</p>
+      </div>
+      }
+
+      <!-- Success message -->
+      @if(successMessage){
+      <div
+        class="bg-green-100 border-l-4 my-4 text-lg border-green-500 text-green-700 p-4"
+      >
+        <p>{{ successMessage }}</p>
+        <small>You will be redirected in {{ timer }} seconds...</small>
+      </div>
+      }
+    </form>
+  </div>
+</section>

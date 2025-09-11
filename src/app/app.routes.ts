@@ -13,12 +13,12 @@ export const routes: Routes = [
         loadChildren: () => import("./features/auth/components/auth.routes").then((m) => m.AUTH_ROUTES)
     },
     {
-        path: 'home',
+        path: '',
         component: MainLayout,
         canActivate: [authGuard],
         children: [
             {
-                path: "",
+                path: "home",
                 loadChildren: () => import("./features/home/home.routes").then((m) => m.HOME_ROUTES)
             },
             {
@@ -44,6 +44,14 @@ export const routes: Routes = [
             {
                 path: "brands",
                 loadChildren: () => import("./features/brands/brands.routes").then((m) => m.BRANDS_ROUTES)
+            },
+            {
+                path: "checkout/:cartId",
+                loadChildren: () => import("./features/payment/payment.routes").then((m) => m.PAYMENT_ROUTES)
+            },
+            {
+                path: "allorders",
+                loadComponent: () => import("./features/cart/pages/all-orders-page/all-orders-page.component").then((m) => m.AllOrdersPageComponent)
             }
         ]
     }

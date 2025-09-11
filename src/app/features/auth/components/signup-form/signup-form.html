@@ -139,7 +139,7 @@
 
     <!-- Submit button -->
     <button
-      [disabled]="isLoading"
+      [disabled]="isLoading || !registerForm.valid"
       type="submit"
       class="min-w-[250px] disabled:bg-gray-500 disabled:cursor-auto block mx-auto text-2xl py-2 mt-8 rounded-full bg-main-400 cursor-pointer hover:bg-main-700 duration-300 text-gray-100 focus:outline-none"
     >

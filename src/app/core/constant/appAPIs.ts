@@ -17,4 +17,10 @@ export const APP_APIS = {
     // Cart
     Cart :`${environment.apiUrl}/cart`,
     
+    //Orders
+    allOrders :`${environment.apiUrl}/orders/user`,
+    // Payment
+    onlinePayment :`${environment.apiUrl}/orders/checkout-session`,
+    cashPayment :`${environment.apiUrl}/orders`,
+    
 } 
