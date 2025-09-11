@@ -7,10 +7,11 @@ import { LoadingSpinner } from "../../../../shared/components/loading-spinner/lo
 import { SectionTitle } from "../../../../shared/components/section-title/section-title";
 import { PopularProducts } from "../../../../shared/components/popular-products/popular-products";
 import { CurrencyPipe } from '@angular/common';
+import { AddToCartBtnComponent } from "../../../../shared/components/add-to-cart-btn/add-to-cart-btn.component";
 
 @Component({
   selector: 'app-product-details',
-  imports: [LoadingSpinner, SectionTitle, PopularProducts , CurrencyPipe],
+  imports: [LoadingSpinner, SectionTitle, PopularProducts, CurrencyPipe, AddToCartBtnComponent],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css'
 })

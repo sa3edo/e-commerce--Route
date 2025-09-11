@@ -11,6 +11,9 @@ export const APP_APIS = {
     // Categories
     getAllCategories :`${environment.apiUrl}/categories`,
     
+    // SubCategories
+    getAllSubCategories :`${environment.apiUrl}/subcategories`,
+    
     // Cart
     Cart :`${environment.apiUrl}/cart`,
     

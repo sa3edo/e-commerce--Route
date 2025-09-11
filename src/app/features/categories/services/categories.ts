@@ -3,6 +3,7 @@ import { baseHttp } from '../../../core/services/base';
 import { IGetAllCategoris } from '../interfaces/IGetAllCategories';
 import { APP_APIS } from '../../../core/constant/appAPIs';
 import { IGetSpecificCategory } from '../interfaces/IGetSpecificCategory';
+import { IGetSubCategories } from '../interfaces/IGetSubCategories';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class CategoriesServices extends baseHttp{
   }
   getSpecificCategory(categotyID : string){
     return this.get<IGetSpecificCategory>(`${APP_APIS.getAllCategories}/${categotyID}`);
+  }
+  getSubcategories(){
+    return this.get<IGetSubCategories>(APP_APIS.getAllSubCategories);
   }
   
 }

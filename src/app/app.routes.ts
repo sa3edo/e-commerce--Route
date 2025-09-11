@@ -7,8 +7,9 @@ import { authGuard } from './core/guards/auth-guard';
 export const routes: Routes = [
     {
         path: '',
+        canActivate: [userGuard],
         component: AuthLayout,
-        
+
         loadChildren: () => import("./features/auth/components/auth.routes").then((m) => m.AUTH_ROUTES)
     },
     {
@@ -31,6 +32,10 @@ export const routes: Routes = [
             {
                 path: "products",
                 loadChildren: () => import("./features/products/products.routes").then((m) => m.PRODUCTS_ROUTES)
+            },
+            {
+                path: "details/:productId",
+                loadComponent: () => import("./features/products/pages/product-details/product-details").then((m) => m.ProductDetails)
             },
             {
                 path: "details/:productId/:slug",

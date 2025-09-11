@@ -1,81 +1,100 @@
 @if(!allProducts){
-<app-loading-spinner/>
+<app-loading-spinner />
 } @else {
-<section class="py-4">
-<app-section-title [title]="'All Products'"/>
-  <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
-    @for(prd of allProducts | paginate: { itemsPerPage: itemsPerPage, currentPage: page,totalItems:totalItems } ;track $index )  {
-    <div class="">
-      <div
-      [style.animationDelay]="($index * 0.1) + 's'"
-        class="card h-full border-2 flex flex-col justify-between border-gray-200 border-opacity-60 rounded-lg overflow-hidden"
+<section class="md:grid grid-cols-10 py-4">
+  <div class="col-span-2 hidden md:block">
+    <app-side-bar [categories]="allCategories" [subCategories]="allSubcategories"></app-side-bar>
+  </div>
+  <!-- main content -->
+  <div class="col-span-8">
+    <app-section-title [title]="'All Products'" />
+    <div class="relative mb-4">
+      <label for="search" class="leading-7 text-2xl text-gray-600"
+        >Search product</label
       >
-        <img
-          class="lg:h-48 md:h-36 h-[450px] w-full object-contain object-center"
-          [src]="prd.imageCover"
-          [alt]="prd.title"
-        />
-        <div class="p-6 flex flex-col justify-between flex-1">
-          <h2
-            class="tracking-widest text-xs title-font font-medium text-main-400 mb-1"
-          >
-            {{ prd.category.name }}
-          </h2>
-          <a
-            [routerLink]="['/home/details', prd._id, prd.slug]"
-            class="title-font text-2xl font-medium line-clamp-1 text-gray-900 mb-3"
-          >
-            {{ prd.title }}
-          </a>
-          <p class="leading-relaxed mb-3 line-clamp-1">{{ prd.description }}</p>
-          <div class="flex items-center justify-between flex-wrap">
-            <button
-              class="min-w-[250px] disabled:cursor-auto block text-2xl py-2 rounded-full bg-main-400 cursor-pointer hover:bg-main-700 duration-300 text-gray-100 focus:outline-none"
+      <input
+        (input)="searchTerm = $event.target.value"
+        type="search"
+        placeholder="search by product name"
+        class="w-full my-2 bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+      />
+    </div>
+    <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
+      @for(prd of allProducts | productSearch : searchTerm |paginate: {
+      itemsPerPage: itemsPerPage, currentPage: page,totalItems:totalItems } ;
+      track $index ) {
+      <div class="">
+        <div
+          [style.animationDelay]="$index * 0.1 + 's'"
+          class="card h-full border-2 flex flex-col p-5 justify-between border-gray-200 border-opacity-60 rounded-2xl overflow-hidden"
+        >
+          <img
+            class="lg:h-48 md:h-36 h-[450px] shadow w-full object-contain object-center rounded-2xl"
+            [src]="prd.imageCover"
+            [alt]="prd.title"
+          />
+          <div class="p-6 flex flex-col justify-between flex-1">
+            <h2
+              class="tracking-widest text-xs title-font font-medium text-main-400 mb-1"
             >
-              Add to cart
-            </button>
-            <span
-              class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200"
+              {{ prd.category.name }}
+            </h2>
+            <a
+              [routerLink]="['/home/details', prd._id, prd.slug]"
+              class="title-font text-2xl font-medium line-clamp-1 text-gray-900 mb-3"
             >
-              <svg
-                class="w-4 h-4 mr-1"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                viewBox="0 0 24 24"
+              {{ prd.title }}
+            </a>
+            <p class="leading-relaxed mb-3 line-clamp-1">
+              {{ prd.description }}
+            </p>
+            <div class="flex items-center justify-between flex-wrap">
+              <app-add-to-cart-btn [productId]="prd._id"></app-add-to-cart-btn>
+              <div class="mx-2.5">   <i class="fa-regular fa-heart text-2xl"></i></div>
+              <span
+                class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200"
               >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle></svg
-              >{{ prd.quantity }}
-            </span>
-            <span
-              class="text-gray-400 inline-flex items-center leading-none text-sm"
-            >
-              <svg
-                class="w-4 h-4 mr-1"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                viewBox="0 0 24 24"
+                <svg
+                  class="w-4 h-4 mr-1"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle></svg
+                >{{ prd.quantity }}
+              </span>
+              <span
+                class="text-gray-400 inline-flex items-center leading-none text-sm"
               >
-                <path
-                  d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
-                ></path></svg
-              >{{ prd.ratingsQuantity }}
-            </span>
+                <svg
+                  class="w-4 h-4 mr-1"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+                  ></path></svg
+                >{{ prd.ratingsQuantity }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
+      }
     </div>
-    }
-  </div>
-  <div class="flex justify-center my-4">
-
-    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+    <div class="flex justify-center my-4">
+      <pagination-controls
+        (pageChange)="pageChanged($event)"
+      ></pagination-controls>
+    </div>
   </div>
 </section>
 }

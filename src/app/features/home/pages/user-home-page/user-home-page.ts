@@ -10,8 +10,5 @@ import * as AOS from 'aos';
   styleUrl: './user-home-page.css'
 })
 export class UserHomePage  {
-  constructor(){
-    console.log(JSON.stringify(localStorage.getItem("token")));
-  }
 
 }

@@ -13,7 +13,7 @@ import { interval, Subject, takeUntil } from 'rxjs';
 })
 export class CategotiesSlider implements OnInit {
   @ViewChild("owlSlider", { static: false })
-  owlSlider! :CarouselComponent
+  owlSlider!: CarouselComponent
   //Inject services
   private readonly categoriesServices = inject(CategoriesServices)
   //Variables
@@ -22,6 +22,20 @@ export class CategotiesSlider implements OnInit {
 
   ngOnInit(): void {
     this.getAllCategories()
+    // if (document.addEventListener) {
+    //   document.addEventListener("visibilitychange", () => {
+    //     console.log('visibilitychange');
+    //     if (this.owlSlider) {
+    //       if (document.visibilityState === 'visible') {
+    //         console.log('Visible');
+    //         this.owlSlider.startAutoplay(); 
+    //       } else {
+    //         console.log('closed');
+    //         this.owlSlider.stopAutoplay();  
+    //       }
+    //     }
+    //   });
+    // }
   }
   // ngAfterViewInit(): void {
   //         interval(2000).pipe(takeUntil(this.destroy$)).subscribe(() => {
@@ -39,19 +53,19 @@ export class CategotiesSlider implements OnInit {
       }
     })
   }
-  onCarouselInitialized(event : SlidesOutputData){
+  onCarouselInitialized(event: SlidesOutputData) {
     console.log('onCarouselInitialized');
     interval(2000).pipe(takeUntil(this.destroy$)).subscribe(() => {
-      if(this.owlSlider) {
+      if (this.owlSlider) {
         this.owlSlider.next()
         console.log('next');
       }
     })
-}
+  }
 
 
 
-  
+
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -59,16 +73,21 @@ export class CategotiesSlider implements OnInit {
     pullDrag: true,
     dots: false,
     autoplay: false,
-    autoplayTimeout: 0,
-    autoplaySpeed: 0,
+    autoplayTimeout: 1950,
+    autoplaySpeed: 1920,
     slideTransition: "linear",
-    smartSpeed: 2000,   // ساعات بتحتاج تضيفها للـ owl
     navSpeed: 2000,
     navText: ['', ''],
     items: 7,
     nav: true
   }
-    ngOnDestroy(): void {
+  translated(event: SlidesOutputData) {
+    console.log('Current index:', event.startPosition);
+    console.log('Active slides:', event.slides);
+  }
+
+
+  ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
     console.log('destroy');

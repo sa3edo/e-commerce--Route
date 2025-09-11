@@ -1,0 +1,83 @@
+<div class="rounded-lg border flex flex-col border-gray-200 bg-white p-5 mb-3 shadow-sm hover:shadow-md transition">
+  <div class="md:flex md:items-start md:gap-6">
+    
+    <!-- Image -->
+    <div class="shrink-0 w-full md:w-40">
+      <img
+        class="object-contain w-full h-40 rounded-lg shadow"
+        [src]="item.product.imageCover"
+        alt="product image"
+      />
+    </div>
+
+    <!-- Details -->
+    <div class="flex-1 flex flex-col justify-between">
+      <div>
+        <h4 class="text-xl font-semibold text-gray-800 hover:text-main-600 transition">
+          {{ item.product.title }}
+        </h4>
+        <p class="text-main-600 font-medium mt-1">
+          Price: {{ item.price | currency : "USD" }}
+        </p>
+      </div>
+
+      <!-- Quantity Controls -->
+      <div class="flex items-center gap-2 mt-4">
+        <button
+          (click)="updateCount(item,'decremnt')"
+          class="w-9 h-9  cursor-pointer  flex items-center justify-center rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100"
+        >
+          <i class="fas fa-minus"></i>
+        </button>
+
+        <span class="px-3 font-medium text-lg">{{ item.count }}</span>
+
+        <button
+          (click)="updateCount(item,'increment')"
+          class="w-9  cursor-pointer h-9 flex items-center justify-center rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100"
+        >
+          <i class="fas fa-plus"></i>
+        </button>
+
+        <button
+        [disabled]="isUpdating"
+          (click)="onUpdeteProduct(item)"
+          class="ml-4 disabled:bg-main-200 disabled:cursor-auto  cursor-pointer px-4 py-2 bg-main-500 text-white rounded-md hover:bg-main-700 transition"
+        >
+                  @if(isUpdating){ <i class="fas fa-sync-alt fa-spin"></i> Updating... }
+        @else {   <i class="fas fa-sync-alt "></i> Update }
+        </button>
+      </div>
+       
+<a
+  [routerLink]="['/home/details', item.product._id]"
+  class="inline-flex items-center gap-2 mt-4 text-main-800 font-medium hover:text-main-800 transition"
+>
+  <i class="fas fa-info-circle"></i>
+  View Details
+</a>
+
+    </div>
+
+    <!-- Actions -->
+    <div class="mt-4 md:mt-0 flex flex-col items-end gap-3">
+      <button class="text-main-500 cursor-pointer  hover:text-main-700">
+        <i class="fa-regular fa-heart text-2xl"></i>
+      </button>
+      <button
+        [disabled]="isRemoving"
+        (click)="onRemove(item.product._id)"
+        class="flex  cursor-pointer items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-red-500 to-red-700 text-white shadow hover:from-red-600 hover:to-red-900 disabled:opacity-50"
+      >
+        @if(isRemoving){ <i class="fas fa-spinner fa-spin"></i> Removing... }
+        @else { <i class="fas fa-trash"></i> Remove }
+      </button>
+    </div>
+  </div>
+
+  <!-- Price -->
+  <div class="mt-4 border-t pt-2 flex justify-between text-lg font-semibold">
+    <span class="text-gray-600">Total:</span>
+    <span class="text-main-600">{{ item.count * item.price | currency : "USD" }}</span>
+  </div>
+</div>

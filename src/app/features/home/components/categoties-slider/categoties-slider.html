@@ -1,8 +1,11 @@
 @if(!allCategories){
     <app-loading-spinner />
 }@else {
+    
   <h1 class="text-2xl capitalize pb-3">popular categories</h1>
-    <owl-carousel-o #owlSlider class="categories-slider" [options]="customOptions" (initialized)="onCarouselInitialized($event)">
+  
+@defer () {
+      <owl-carousel-o #owlSlider class="categories-slider"   (changed)="translated($event)" (initialized)="onCarouselInitialized($event)" (translated)="translated($event)" [options]="customOptions" >
         
         @for (cat of allCategories; track cat._id) {
             <ng-template carouselSlide [id]="cat._id">
@@ -12,4 +15,5 @@
         }
         
     </owl-carousel-o>
+}
 }

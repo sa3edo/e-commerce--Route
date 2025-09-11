@@ -4,6 +4,7 @@ import { ICategoriesData, IGetAllCategoris } from '../../interfaces/IGetAllCateg
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoadingSpinner } from "../../../../shared/components/loading-spinner/loading-spinner";
 import { SectionTitle } from "../../../../shared/components/section-title/section-title";
+import { IGetSubCategories, ISubCatData } from '../../interfaces/IGetSubCategories';
 
 @Component({
   selector: 'app-categories-page',
@@ -17,9 +18,11 @@ export class CategoriesPage implements OnInit {
 
   //variables
   allCategories!:ICategoriesData[]
+  allSubcategories!:ISubCatData[]
 
   ngOnInit(): void {
     this.getAllCategoris()
+    this.getAllSubCategoris()
   }
 
   getAllCategoris(){
@@ -27,6 +30,16 @@ export class CategoriesPage implements OnInit {
       next:(response : IGetAllCategoris) => {
         console.log(response);
         this.allCategories = response.data;
+      },error:(error : HttpErrorResponse) => {
+        console.log(error.error);
+      }
+    })
+  }
+  getAllSubCategoris(){
+    this.categoriesServices.getSubcategories().subscribe({
+      next:(response : IGetSubCategories) => {
+        console.log(response);
+        this.allSubcategories = response.data;
       },error:(error : HttpErrorResponse) => {
         console.log(error.error);
       }

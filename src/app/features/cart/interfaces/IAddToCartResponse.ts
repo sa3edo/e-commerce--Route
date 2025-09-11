@@ -5,7 +5,7 @@ export interface Product {
 	price: number;
 }
 
-export interface ICartItem {
+export interface data {
 	_id: string;
 	cartOwner: string;
 	products: Product[];
@@ -20,5 +20,5 @@ export interface IAddToCartResponse {
 	message: string;
 	numOfCartItems: number;
 	cartId: string;
-	data: ICartItem;
+	data: data;
 }

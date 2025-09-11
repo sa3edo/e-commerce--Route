@@ -1,1 +1,88 @@
-<p>cart-page works!</p>
+<!-- Shopping cart title -->
+<app-section-title [title]="'Your Shopping Cart'"></app-section-title>
+
+@if(!cartItems){
+  <app-loading-spinner />
+} @else {
+<section class="py-6">
+  <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+    <div class="lg:flex lg:items-start lg:gap-8 bg-gray-50 rounded-xl p-6 shadow-md">
+      
+      <!-- Product list -->
+      <div class="w-full lg:w-2/3 max-h-[70vh] overflow-y-auto ">
+        @if(cartItems.length > 0){
+          @for(item of cartItems; track item._id){
+            <app-cart-item [item]="item" (update)="getCart()" />
+          } @empty {
+            <div class="flex flex-col items-center justify-center text-center bg-white border border-gray-200 rounded-2xl p-10 shadow-sm">
+              <i class="fas fa-shopping-cart text-main-500 text-7xl mb-4"></i>
+              <p class="text-2xl font-bold text-gray-800 mb-2">Your Cart is Empty</p>
+              <p class="text-gray-500 mb-6">Looks like you haven’t added anything yet.</p>
+              <a
+                routerLink="/home/products"
+                class="bg-main-600 hover:bg-main-700 text-white text-lg font-medium px-6 py-3 rounded-full transition duration-300"
+              >
+                Browse Products
+              </a>
+            </div>
+          }
+        }
+      </div>
+
+      <!-- Order summary -->
+      @if(cartItems.length > 0){
+      <div class="w-full lg:w-1/3 bg-white border border-gray-200 rounded-xl p-6 shadow-md">
+        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Order Summary</h3>
+
+        <div class="space-y-3 mb-6">
+          <div class="flex justify-between">
+            <span class="text-gray-600">Items</span>
+            <span class="font-medium text-gray-900">{{ totalCartItems }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600">Subtotal</span>
+            <span class="font-medium text-gray-900">{{ totalPrice | currency : "USD" }}</span>
+          </div>
+          <div class="flex justify-between border-t pt-3">
+            <span class="text-lg font-bold text-gray-800">Total</span>
+            <span class="text-lg font-bold text-main-600">{{ totalPrice | currency : "USD" }}</span>
+          </div>
+        </div>
+
+        <!-- Checkout button -->
+        <button
+          class="w-full flex items-center justify-center rounded-lg bg-main-600 px-5 py-3 text-lg font-semibold text-white hover:bg-main-700 transition duration-300 shadow-md"
+        >
+          Proceed to Checkout
+        </button>
+
+        <!-- Continue shopping -->
+        <div class="text-center mt-4">
+          <a
+            routerLink="/home/products"
+            class="text-sm font-medium text-main-700 underline hover:no-underline"
+          >
+            Continue Shopping →
+          </a>
+        </div>
+
+        <!-- Clear Cart -->
+        <div class="mt-6 text-center">
+          <button
+            (click)="clearCart()"
+            [disabled]="isClear"
+            class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium shadow-md transition disabled:opacity-50"
+          >
+            @if(isClear){ 
+              <i class="fas fa-spinner fa-spin"></i> Clearing...
+            } @else {
+              <i class="fas fa-trash-alt"></i> Clear Cart
+            }
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+}

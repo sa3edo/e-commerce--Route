@@ -12,20 +12,24 @@
 }
 
 .card {
-  transform: scaleY(0) scale(0);
+  transform: scaleY(0) ;
   opacity: 0;
   animation: scaleDown .5s forwards;
   transform-origin: top;
 }
+.fadeDown{
+    max-height: 500px !important;
+    opacity: 1 !important;
 
+}
 @keyframes scaleDown {
   from {
-    transform: scaleY(0) scale(0);
+    transform: scaleY(0) ;
     opacity: 0;
   }
 
   to {
-    transform: scaleY(1) scale(1);
+    transform: scaleY(1) ;
     opacity: 1;
   }
 }

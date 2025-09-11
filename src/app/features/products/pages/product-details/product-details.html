@@ -11,13 +11,13 @@
 
 <div class="grid gap-4 lg:w-1/2 w-full    rounded">
     <div>
-        <img #mainImage class="h-[350px] mx-auto object-center object-contain max-w-full rounded-lg" [src]="product.imageCover">
+        <img #mainImage class="h-[350px] shadow-lg mx-auto object-center object-contain max-w-full rounded-lg" [src]="product.imageCover">
     </div>
     <hr>
-    <div class="grid grid-cols-4 p-3 gap-4">
+    <div class="grid grid-cols-4 p-3 gap-4 ">
         @for(image of product.images;track $index){
                     <div (click)="mainImage.src = image">
-            <img  class="md:h-[150px] h-[70px] max-w-full mx-auto hover:-translate-y-1 hover:shadow-2xl duration-300 cursor-pointer object-center shadow-lg object-contain rounded-xl" [src]="image" alt="">
+            <img  class="md:h-[150px] h-[70px]  max-w-full mx-auto hover:-translate-y-1 hover:shadow-2xl duration-300 cursor-pointer object-center shadow-lg object-contain rounded-xl" [src]="image" alt="">
         </div>
         }
 
@@ -68,7 +68,7 @@
 
             <div class="flex flex-wrap space-y-5">
               <span class="title-font font-medium text-2xl text-gray-900">  {{ product.price | currency:'USD':'symbol':'1.2-3' }}</span>
-              <button class="btn-main w-full !mt-0">add to cart</button>
+              <app-add-to-cart-btn [productId]="product._id"></app-add-to-cart-btn>
               <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ">
                 <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>

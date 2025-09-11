@@ -1,0 +1,31 @@
+/* .sub-list {
+    transform: scaleY(0);
+    transform-origin: top;
+    height: 0;
+    opacity: 0;
+    transition: all .5s ease;
+}
+
+.open {
+    height: auto;
+    transform: scaleY(1);
+    opacity: 1;
+} */
+/* العنصر الأساسي بتاع الكاتيجوري */
+.transition-item {
+    max-height: 55px;
+    /* الطول الافتراضي لعنوان الكاتيجوري بس */
+    overflow: hidden;
+    transition: all .8s ease;
+}
+
+/* لما يفتح */
+.open {
+    max-height: 500px;
+    /* يوسع علشان يظهر الـ subcategories */
+}
+
+.close {
+    max-height: 66px;
+    /* يوسع علشان يظهر الـ subcategories */
+}

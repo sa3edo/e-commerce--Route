@@ -1,12 +1,39 @@
-@theme{
-    --color-main-100:#ceefce;
-    --color-main-200:#9dde9d;
-    --color-main-300:#6cce6c;
-    --color-main-400:#3bbd3b;
-    --color-main-500:#0aad0a;
-    --color-main-600:#088a08;
-    --color-main-700:#066806;
-    --color-main-800:#044504;
-    --color-main-900:#022302;
+@theme {
+  /* Main Brand Palette */
+  --color-main-100:#d5f1e9;
+  --color-main-200:#ace3d3;
+  --color-main-300:#82d5bd;
+  --color-main-400:#59c7a7;
+  --color-main-500:#2fb991;
+  --color-main-600:#269474;
+  --color-main-700:#1c6f57;
+  --color-main-800:#134a3a;
+  --color-main-900:#09251d;
+
+  /* Neutral Colors */
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+  --color-neutral-700: #374151;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
+
+  /* Text */
+  --color-text-primary: #1c1c1c;
+  --color-text-secondary: #555;
+  --color-text-muted: #888;
+
+  /* States */
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+
+  /* Gradients */
+  --gradient-main: linear-gradient(135deg, var(--color-main-400), var(--color-main-600));
 
 }
