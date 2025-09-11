@@ -4,6 +4,7 @@ import { IGetAllCategoris } from '../interfaces/IGetAllCategories';
 import { APP_APIS } from '../../../core/constant/appAPIs';
 import { IGetSpecificCategory } from '../interfaces/IGetSpecificCategory';
 import { IGetSubCategories } from '../interfaces/IGetSubCategories';
+import { IGetAllProducts } from '../../products/interfaces/IGetAllProducts';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,10 @@ export class CategoriesServices extends baseHttp{
   getSubcategories(){
     return this.get<IGetSubCategories>(APP_APIS.getAllSubCategories);
   }
-  
+  getProductByCategory(categoryId : string){
+    return this.get<IGetAllProducts>(APP_APIS.getAllProducts,{'category[in]':categoryId});
+  }
+  //     getProductsByBrand(brandId:string){
+  //  return this.get<IGetAllProducts>(APP_APIS.getAllProducts,{'brand[in]':brandId})
+  // }
 }

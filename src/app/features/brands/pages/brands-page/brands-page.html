@@ -1,1 +1,21 @@
-<p>brands-page works!</p>
+<!-- brand-page.component.html -->
+@if(!brands) {
+  <div class="flex justify-center py-10">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+} @else {
+  <app-section-title [title]="'Brands'"/>
+  
+  <div class="py-10">
+    <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-6">
+      @for(brand of brands; track brand._id) {<a href="" [routerLink]="['specific-brand',brand._id]">
+
+          <div class="brand-card rounded-lg p-6 flex cursor-pointer flex-col items-center shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+              <img [src]="brand.image" [alt]="brand.name" class="w-32 h-32 border-b border-main-500 object-contain mb-4 transition-transform duration-300 hover:rotate-3 hover:scale-110" />
+              <h3 class="text-lg font-semibold text-main-500 transition-colors duration-300 hover:text-main-700">{{ brand.name }}</h3>
+            </div>
+        </a>
+      }
+    </div>
+  </div>
+}

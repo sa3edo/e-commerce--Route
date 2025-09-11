@@ -8,6 +8,9 @@ export const APP_APIS = {
     // Products
     getAllProducts:`${environment.apiUrl}/products`,
     
+    // Brands
+    getAllBrands:`${environment.apiUrl}/brands`,
+    
     // Categories
     getAllCategories :`${environment.apiUrl}/categories`,
     

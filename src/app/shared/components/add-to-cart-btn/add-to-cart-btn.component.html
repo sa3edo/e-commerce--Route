@@ -1,12 +1,12 @@
-            <button
-            [disabled]="isLoading"
-            (click)="addToCart(productId)"
-              class=" disabled:cursor-auto size-12 rounded-full disabled:bg-main-800 block text-lg  bg-main-400 cursor-pointer hover:bg-main-700 duration-300 text-gray-100 focus:outline-none"
-            >
-            @if(isLoading){
-   <i class="fas fa-spinner fa-spin"></i>
-   }@else {
-     
-     <i class="fa fa-plus"></i>
-    }
-            </button>
+<button
+  [disabled]="isLoading"
+  (click)="addToCart(productId)"
+  class="add disabled:cursor-auto  size-12 rounded-full disabled:bg-main-800 block text-lg bg-main-400 cursor-pointer hover:bg-main-700 duration-300 text-gray-100 focus:outline-none"
+>
+  @if(isLoading){
+  <i class="fas fa-spinner fa-spin"></i>
+  }@else {
+
+  <i class="fa-solid fa-cart-plus cart-icon"></i>
+  }
+</button>

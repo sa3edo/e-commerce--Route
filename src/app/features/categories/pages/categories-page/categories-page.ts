@@ -5,10 +5,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { LoadingSpinner } from "../../../../shared/components/loading-spinner/loading-spinner";
 import { SectionTitle } from "../../../../shared/components/section-title/section-title";
 import { IGetSubCategories, ISubCatData } from '../../interfaces/IGetSubCategories';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-categories-page',
-  imports: [LoadingSpinner, SectionTitle],
+  imports: [LoadingSpinner, SectionTitle, RouterLink],
   templateUrl: './categories-page.html',
   styleUrl: './categories-page.css'
 })

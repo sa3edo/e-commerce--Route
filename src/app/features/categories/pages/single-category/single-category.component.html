@@ -1,0 +1,34 @@
+@if( !products) {
+  <div class="flex justify-center py-10">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+}@else {
+  <app-section-title [title]="category.name"></app-section-title>
+
+  <div class="bg-gray-100 p-6 rounded-lg flex items-center gap-6">
+    <!-- Category Image -->
+    <img
+      [src]="category.image"
+      [alt]="category.name"
+      class="w-24 h-24 object-contain rounded-lg bg-white p-2 shadow"
+    />
+
+    <!-- Category Details -->
+    <div class="flex flex-col">
+      <h2 class="text-xl font-semibold">Category Name:</h2>
+      <span class="text-lg mb-1">{{ category.name }}</span>
+      <span class="text-green-600 lowercase mb-2">{{ category.slug }}</span>
+      <span class="text-gray-700">Total Products: {{ products.length }}</span>
+      <span class="text-gray-500 text-sm">
+        Last Update: {{ category.updatedAt | date : "MMM d, y, h:mm:ss a" }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    @for(prd of products; track prd._id) {
+      <app-product-card [prd]="prd"></app-product-card>
+    }
+  </div>
+}
