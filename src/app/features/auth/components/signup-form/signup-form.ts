@@ -26,13 +26,13 @@ export class SignupForm implements OnInit {
   isLoading: boolean = false // track the request
   timer: number = 5;
   ngOnInit() {
-    this.registerForm.setValue({
-      name: "mohammed",
-      email: "mohamed20@gmail.com",
-      password: "01091215398@My",
-      rePassword: "01091215398@My",
-      phone: "01091215398",
-    })
+    // this.registerForm.setValue({
+    //   name: "mohammed",
+    //   email: "mohamed20@gmail.com",
+    //   password: "01091215398@My",
+    //   rePassword: "01091215398@My",
+    //   phone: "01091215398",
+    // })
   }
 
   registerForm = new FormGroup({
