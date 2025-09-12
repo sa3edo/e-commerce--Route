@@ -1,0 +1,57 @@
+@if(!products) {
+  <div class="flex justify-center py-10">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+}@else {
+  <app-section-title [title]="'My Wishlist'"></app-section-title>
+
+  <div class="py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    @for(prod of products; track prod._id) {
+      <div class="card h-full border-2 flex flex-col p-5 justify-between border-gray-200 border-opacity-60 rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:scale-105">
+        
+        <!-- Product Image -->
+        <img
+          class="lg:h-48 md:h-36 h-[350px] w-full object-contain object-center rounded-2xl shadow"
+          [src]="prod.imageCover"
+          [alt]="prod.title"
+        />
+
+        <div class="p-4 flex flex-col justify-between flex-1">
+          <!-- Category -->
+          <h2 class="tracking-widest text-xs title-font font-medium text-main-400 mb-1">
+            {{ prod.category.name }}
+          </h2>
+
+          <!-- Product Title -->
+          <a
+            [routerLink]="['/details', prod._id, prod.slug]"
+            class="title-font text-lg font-medium line-clamp-1 text-gray-900 mb-2"
+          >
+            {{ prod.title }}
+          </a>
+
+          <!-- Price -->
+          <span class="text-main-500 font-semibold mb-2">${{ prod.price }}</span>
+
+          <!-- Product Stats -->
+          <div class="flex items-center justify-between flex-wrap">
+            <span class="text-gray-400 inline-flex items-center text-sm">
+              <i class="fa-solid fa-star mr-1 text-yellow-400"></i>
+              {{ prod.ratingsAverage }} ({{ prod.ratingsQuantity }})
+            </span>
+
+            <span class="text-gray-400 inline-flex items-center text-sm">
+              <i class="fa-solid fa-box-open mr-1"></i>
+              {{ prod.quantity }} in stock
+            </span>
+          </div>
+
+          <!-- Add to Cart Button -->
+          <div class="mt-4">
+            <app-add-to-cart-btn [productId]="prod._id"></app-add-to-cart-btn>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+}

@@ -8,10 +8,11 @@ import { SectionTitle } from "../../../../shared/components/section-title/sectio
 import { PopularProducts } from "../../../../shared/components/popular-products/popular-products";
 import { CurrencyPipe } from '@angular/common';
 import { AddToCartBtnComponent } from "../../../../shared/components/add-to-cart-btn/add-to-cart-btn.component";
+import { AddToWishlistBtnComponent } from "../../../../shared/components/add-to-wishlist-btn/add-to-wishlist-btn.component";
 
 @Component({
   selector: 'app-product-details',
-  imports: [LoadingSpinner, SectionTitle, PopularProducts, CurrencyPipe, AddToCartBtnComponent],
+  imports: [LoadingSpinner, SectionTitle, PopularProducts, CurrencyPipe, AddToCartBtnComponent, AddToWishlistBtnComponent],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css'
 })

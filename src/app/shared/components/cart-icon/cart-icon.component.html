@@ -1,0 +1,12 @@
+<div class="cart fixed cursor-pointer">
+  <a routerLink="cart">
+    <i class="fa fa-cart-shopping animate-bounce"></i>
+    @if(cartCount > 0){
+    <span
+      class="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full font-bold shadow-sm"
+    >
+      {{ cartCount }}
+    </span>
+    }
+  </a>
+</div>

@@ -4,7 +4,8 @@ export const APP_APIS = {
     // Authentication
     registerApi:`${environment.apiUrl}/auth/signup`,
     loginApi:`${environment.apiUrl}/auth/signin`,
-
+    forgotPasswords:`${environment.apiUrl}/forgotPasswords`,
+    verifyResetCode:`${environment.apiUrl}/verifyResetCode`,
     // Products
     getAllProducts:`${environment.apiUrl}/products`,
     
@@ -13,6 +14,9 @@ export const APP_APIS = {
     
     // Categories
     getAllCategories :`${environment.apiUrl}/categories`,
+    
+    // WishList
+    WishList :`${environment.apiUrl}/wishlist`,
     
     // SubCategories
     getAllSubCategories :`${environment.apiUrl}/subcategories`,

@@ -13,7 +13,7 @@ import { IGetUserOrder } from "../interfaces/IGetUserOrders";
 })
 export class CartServices extends baseHttp {
     // private readonly platform = inject(PLATFORM_ID)
-
+    
     addToCart(productId: string) {
 
         return this.post<IAddToCartResponse>(APP_APIS.Cart, { productId: productId }, { token: localStorage.getItem('token') })

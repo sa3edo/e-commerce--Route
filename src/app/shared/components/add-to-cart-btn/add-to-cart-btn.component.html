@@ -6,7 +6,7 @@
   @if(isLoading){
   <i class="fas fa-spinner fa-spin"></i>
   }@else {
-
-  <i class="fa-solid fa-cart-plus cart-icon"></i>
+    
+  <i class="fa-solid fa-cart-plus cart-icon" [class.animate-bounce-once]="isAdded"></i>
   }
 </button>

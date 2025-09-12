@@ -14,18 +14,20 @@ export class AddToCartBtnComponent {
   @Input() productId!: string;
   //variables
   isLoading: boolean = false;
-
+  isAdded: boolean = false;
   //Inject services
   private readonly cartServices = inject(CartServices)
   private readonly toast = inject(ToastrService)
 
 
   addToCart(productId: string): void {
+
     this.isLoading = true;
     this.cartServices.addToCart(productId).subscribe({
       next: (response: IAddToCartResponse) => {
         console.log(response);
         this.isLoading = false;
+        this.isAdded = true;
         this.toast.success("", response.message);
       }, error: (error: HttpErrorResponse) => {
         console.log(error.error);

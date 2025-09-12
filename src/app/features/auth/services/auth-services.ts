@@ -23,4 +23,11 @@ export class AuthService extends baseHttp{
         localStorage.clear();
         this.router.navigateByUrl('/signin');
     }
+  forgotPassword(email: string) {
+    return this.http.post(`${APP_APIS.forgotPasswords}`, { email });
+  }
+
+  verifyResetCode(email: string, code: string, newPassword: string) {
+    return this.http.post(`${APP_APIS.verifyResetCode}`, {  code : code});
+  }
 }

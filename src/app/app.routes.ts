@@ -50,6 +50,10 @@ export const routes: Routes = [
                 loadChildren: () => import("./features/payment/payment.routes").then((m) => m.PAYMENT_ROUTES)
             },
             {
+                path: "wishlist",
+                loadChildren: () => import("./features/wishList/wishlist.routes").then((m) => m.WISHLIST_ROUTES)
+            },
+            {
                 path: "allorders",
                 loadComponent: () => import("./features/cart/pages/all-orders-page/all-orders-page.component").then((m) => m.AllOrdersPageComponent)
             }

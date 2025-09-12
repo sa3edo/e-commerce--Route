@@ -1,0 +1,16 @@
+<div
+  class="mx-2.5 p-3 rounded-full cursor-pointer flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:bg-red-100"
+  (click)="addTowishlist()"
+>
+  @if(!isWishlistLoading) {
+  <i
+    class="fa-heart text-2xl transition-transform duration-300"
+    [ngClass]="{
+      'fa-regular': !addedToWishlist,
+      'fa-solid text-red-600 animate-bounce-once': addedToWishlist
+    }"
+  ></i>
+  }@else {
+  <i class="fas fa-spinner fa-spin text-2xl text-gray-500"></i>
+  }
+</div>

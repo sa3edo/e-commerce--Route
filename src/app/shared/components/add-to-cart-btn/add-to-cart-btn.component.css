@@ -7,6 +7,10 @@
   display: inline-block; /* needed for transform to work correctly */
   transition: transform 0.2s;
 }
+.animate-bounce-once {
+    animation: bounce 0.5s 2;
+    /* play only once */
+}
 @keyframes bounce {
 
   0%,
