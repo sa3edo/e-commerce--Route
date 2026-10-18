@@ -8,7 +8,7 @@ import { interval, take } from 'rxjs';
 
 @Component({
   selector: 'app-signin-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule ],
   templateUrl: './signin-form.html',
   styleUrl: './signin-form.css'
 })

@@ -29,8 +29,8 @@ export class SignupForm implements OnInit {
     // this.registerForm.setValue({
     //   name: "mohammed",
     //   email: "mohamed20@gmail.com",
-    //   password: "01091215398@My",
-    //   rePassword: "01091215398@My",
+    //   password: "123456789@My",
+    //   rePassword: "123456789@My",
     //   phone: "01091215398",
     // })
   }

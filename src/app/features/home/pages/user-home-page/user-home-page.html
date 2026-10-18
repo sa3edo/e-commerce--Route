@@ -1,11 +1,11 @@
 <main class="my-4">
-    <div >
-
-        <app-main-slider />
-    </div>
-    <div >
-
-        <app-categoties-slider />
-    </div>
+  <div>
+    @defer (on idle) {
+      <app-main-slider />
+    }
+  </div>
+  <div>
+    <app-categoties-slider />
+  </div>
   <app-popular-products />
 </main>

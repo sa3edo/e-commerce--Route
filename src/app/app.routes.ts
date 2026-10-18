@@ -3,6 +3,7 @@ import { AuthLayout } from './core/layouts/auth-layout/auth-layout/auth-layout';
 import { MainLayout } from './core/layouts/main-layout/main-layout/main-layout';
 import { userGuard } from './core/guards/user-guard';
 import { authGuard } from './core/guards/auth-guard';
+import { NotFound } from './features/static-pages/not-found/not-found';
 
 export const routes: Routes = [
     {
@@ -58,5 +59,9 @@ export const routes: Routes = [
                 loadComponent: () => import("./features/cart/pages/all-orders-page/all-orders-page.component").then((m) => m.AllOrdersPageComponent)
             }
         ]
+    },
+    {
+        path: '**',
+        component: NotFound,
     }
 ];
